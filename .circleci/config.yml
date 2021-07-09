@@ -32,7 +32,7 @@ jobs:
 workflows:
   workflow1:
     when:
-      - equal: [false, << pipeline.parameters.run_cleanup_workflow >>]
+      equal: [false, << pipeline.parameters.run_cleanup_workflow >>]
     jobs:
       - build
       - deploy:
@@ -40,6 +40,6 @@ workflows:
             - build
   cleanupworkflow:
     when:
-      - equal: [true, << pipeline.parameters.run_cleanup_workflow >>]
+      equal: [true, << pipeline.parameters.run_cleanup_workflow >>]
     jobs:
       - cleanup
