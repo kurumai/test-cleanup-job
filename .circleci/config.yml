@@ -4,7 +4,7 @@ parameters:
   run_cleanup_workflow:
     type: boolean
     default: false
-  cleanup_workflow_id:
+  target_workflow_id:
     type: string
     default: ""
      
@@ -15,7 +15,7 @@ commands:
       - run: 
           name: Start cleanup workflow
           command: |
-            json=$(curl -s -H 'Accept: application/json' -X GET https://circleci.com/api/v2/workflow/<< pipeline.parameters.cleanup_workflow_id >>/job?circle-token=${CIRCLE_TOKEN})
+            json=$(curl -s -H 'Accept: application/json' -X GET https://circleci.com/api/v2/workflow/<< pipeline.parameters.target_workflow_id >>/job?circle-token=${CIRCLE_TOKEN})
             echo $json
   triggercleanupworkflow:
     description: Trigger cleanup workflow
@@ -52,6 +52,12 @@ jobs:
       - image: cimg/base:2021.07
     steps:
       - checkout
+      - run: |
+          while true; do
+            json=$(curl -s -H 'Accept: application/json' -X GET https://circleci.com/api/v2/workflow/<< pipeline.parameters.target_workflow_id >>?circle-token=${CIRCLE_TOKEN})
+            echo $json
+            exit 0
+          done
       - run: echo "cleanup"
 
 workflows:
