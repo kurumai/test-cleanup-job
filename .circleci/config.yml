@@ -42,6 +42,11 @@ jobs:
     steps:
       - checkout
       - run: echo "deploy"
+  deploy-slow:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - run: sleep 100
   cleanup:
     docker:
       - image: cimg/base:2021.07
@@ -55,6 +60,9 @@ workflows:
       equal: [false, << pipeline.parameters.run_cleanup_workflow >>]
     jobs:
       - build
+      - deploy-slow:
+          requires:
+            - build
       - deploy:
           requires:
             - build
