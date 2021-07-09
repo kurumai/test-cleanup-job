@@ -23,7 +23,7 @@ commands:
       - run:
           name: Trigger cleanup workflow
           command: |
-            curl --request POST 'https://circleci.com/api/v2/project/github/ogii/test-cleanup-job/pipeline' \
+            curl --request POST 'https://circleci.com/api/v2/project/github/kurumai/test-cleanup-job/pipeline' \
             --header "circle-token: $CIRCLE_TOKEN" \
             --header 'content-type: application/json' \
             --data '{"parameters":{"run_cleanup_workflow":true, "target_workflow_id":"${CIRCLE_WORKFLOW_ID}"}}'
