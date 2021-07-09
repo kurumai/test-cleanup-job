@@ -12,7 +12,10 @@ commands:
   queryapi:
     description: Query status of workflow
     steps:
-      - run: echo << pipeline.id >>
+      - run: 
+          name: Start cleanup worjflow
+          command: |
+            echo << pipeline.id >>
 
 jobs:
   build:
