@@ -34,7 +34,6 @@ jobs:
     steps:
       - checkout
       - triggercleanupworkflow
-      - queryapi
       - run: echo "build"
   deploy:
     docker:
