@@ -10,7 +10,7 @@ parameters:
     
 commands:
   queryapi:
-    - run: echo << pipeline.id >>
+    run: echo << pipeline.id >>
 
     
 jobs:
