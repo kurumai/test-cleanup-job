@@ -15,7 +15,7 @@ commands:
       - run: 
           name: Start cleanup workflow
           command: |
-            json=$(curl -s -H 'Accept: application/json' -X GET https://circleci.com/api/v2/workflow/<< pipeline.parameters.target_workflow_id >>/job?circle-token=${CIRCLE_TOKEN})
+            json=$(curl -s -H 'Accept: application/json' -X GET -u $CIRCLECI_TOKEN: "https://circleci.com/api/v2/workflow/<< pipeline.parameters.target_workflow_id >>")
             echo $json
   triggercleanupworkflow:
     description: Trigger cleanup workflow
