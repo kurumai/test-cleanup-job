@@ -10,9 +10,10 @@ parameters:
     
 commands:
   queryapi:
-    run: echo << pipeline.id >>
+    description: Query status of workflow
+    steps:
+      - run: echo << pipeline.id >>
 
-    
 jobs:
   build:
     docker:
