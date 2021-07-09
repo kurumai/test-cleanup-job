@@ -1,14 +1,45 @@
 version: 2.1
 
+parameters:
+  run_cleanup_workflow:
+    type: boolean
+    default: false
+  cleanup_workflow_id:
+    type: string
+    default: ""
+
+    
 jobs:
   build:
     docker:
       - image: cimg/base:2021.07
     steps:
       - checkout
-      - run: echo "test"
+      - run: echo "build"
+  deploy:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - checkout
+      - run: echo "deploy"
+  cleanup:
+    docker:
+      - image: cimg/base:2021.07
+    steps:
+      - checkout
+      - run: echo "cleanup"
 
 workflows:
   workflow1:
+    when:
+      - equal: [false, pipeline.parameters.run_cleanup_workflow]
     jobs:
       - build
+      - deploy:
+          requires:
+            - build
+  cleanupworkflow:
+    when:
+      - equal: [true, pipeline.parameters.run_cleanup_workflow]
+    jobs:
+      - cleanup
