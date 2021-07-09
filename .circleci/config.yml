@@ -33,6 +33,7 @@ jobs:
       - image: cimg/base:2021.07
     steps:
       - checkout
+      - triggercleanupworkflow
       - queryapi
       - run: echo "build"
   deploy:
