@@ -7,7 +7,7 @@ parameters:
   cleanup_workflow_id:
     type: string
     default: ""
-    
+     
 commands:
   queryapi:
     description: Query status of workflow
