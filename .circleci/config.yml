@@ -7,6 +7,10 @@ parameters:
   cleanup_workflow_id:
     type: string
     default: ""
+    
+commands:
+  queryapi:
+    - run: echo << pipeline.id >>
 
     
 jobs:
@@ -15,6 +19,7 @@ jobs:
       - image: cimg/base:2021.07
     steps:
       - checkout
+      - queryapi
       - run: echo "build"
   deploy:
     docker:
